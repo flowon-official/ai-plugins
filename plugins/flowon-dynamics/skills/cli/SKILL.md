@@ -1,5 +1,5 @@
 ---
-name: tools
+name: cli
 description: Manage Logic Fabric (Flowon) projects and Dynamics 365 / Dataverse solutions with the Flowon command-line tools (`flowon-dynamics`, or the Flowon PowerShell module). Use when the user wants to list features or projects, export or import solutions, .flop packages or business data, export or import security (business units, security roles, teams and team roles), generate or apply data mappings, write data-spec files, enable or disable plugins or Logic Recipes, bump solution versions, create, export or merge solution patches, publish Logic APIs, generate OpenAPI schemas or docs, run Logic Fabric test cases through Logic Foundry, or build Azure DevOps / GitHub Actions deployment pipelines for Logic Fabric.
 ---
 
@@ -26,10 +26,8 @@ dotnet --version                   # needs the .NET 10 SDK or later
 - Update: `dotnet tool update --global Flowon.Xrm.Tools.CommandLine`
 - Repo-local (CI): `dotnet new tool-manifest`, then `dotnet tool install Flowon.Xrm.Tools.CommandLine`,
   then run `dotnet tool run flowon-dynamics ...`
-- **This skill is installed by the tools.** The comment at the top of this file names the tools
-  version it came from. If `flowon-dynamics --version` is newer, tell the user to run
-  `flowon-dynamics install-skill` (or `install-skill --user`, matching where this copy lives) to
-  update the skill, and start a new session after it.
+- **This skill comes with the Logic Fabric CLI plugin for Claude Code** (`flowon-dynamics@flowon`).
+  Keep it current with `claude plugin update flowon-dynamics@flowon`.
 - If a command's options are unclear, run `flowon-dynamics <command> --help`. The installed
   version's help output wins over this file.
 
@@ -59,7 +57,7 @@ Rules:
 
 | Risk | Commands | Rule |
 |------|----------|------|
-| Read-only | `features`, `projects`, `export`, `export-security`, `generate-mappings`, `docs`, `generate-openapi`, `install-skill`, `import -sf ... --security-what-if` | Run freely. They write only local files or change nothing. |
+| Read-only | `features`, `projects`, `export`, `export-security`, `generate-mappings`, `docs`, `generate-openapi`, `import -sf ... --security-what-if` | Run freely. They write only local files or change nothing. |
 | Changes the environment | `import`, `apply-mappings`, `enable-plugins`, `disable-plugins`, `enable-recipe`, `disable-recipe`, `increment-solution-version`, `create-patch`, `publish-api`, `test` (creates its fixture rows and removes them afterwards) | Confirm the target environment and the exact command with the user first, unless they already approved this run. |
 | High risk | Any command that changes **production**; `import --override-unmanaged-customizations`; `import --security-mode replace` (can remove or lower role privileges); `import --security-prune` (removes team roles); `merge-patches` (deletes the patches; can't be undone); `disable-plugins` | Always confirm, even if an earlier step was approved. Suggest a backup and a UAT run first. For a security file, run it with `--security-what-if` first and show the user the list of changes. |
 
@@ -252,15 +250,6 @@ flowon-dynamics test --foundry-url "https://<foundry host>/mcp" --project "<Proj
 flowon-dynamics docs -p "./artifacts/<Project>.flop" -o "./docs"    # writes <Project>_docs.zip
 ```
 
-### Skill (alias `is`, local only)
-```bash
-flowon-dynamics install-skill                # into ./.claude/skills/logic-fabric, shared with the repo
-flowon-dynamics install-skill --user         # into ~/.claude/skills/logic-fabric, for all projects
-flowon-dynamics install-skill -d <repo root> # into another project
-```
-It replaces files it installed earlier. It refuses files it didn't install, such as a copy edited
-by hand, unless `--force` is given.
-
 ## 5. Workflows
 
 ### Export for source control
@@ -365,7 +354,6 @@ parameters are named like the CLI's long options (`-ConnectionString`, `-Project
 | `enable-recipe` / `disable-recipe` | `Enable-FlowonLogicRecipe` / `Disable-FlowonLogicRecipe` (one error per failing recipe) |
 | `increment-solution-version` / `create-patch` / `merge-patches` | `Step-FlowonSolutionVersion` / `New-FlowonSolutionPatch` / `Merge-FlowonSolutionPatch` (asks for confirmation; `-Confirm:$false` in scripts) |
 | `publish-api` | `Publish-FlowonApi` (returns the new version) |
-| `install-skill` | `Install-FlowonSkill [-User] [-ProjectDirectory <path>] [-Force]` |
 
 - Cmdlets that change an environment support `-WhatIf` and `-Confirm`. `Import-FlowonProject -WhatIf`
   with only `-SecurityFilePath` lists the security changes.

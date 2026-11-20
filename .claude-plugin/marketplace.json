@@ -1,12 +1,17 @@
 {
   "name": "flowon",
-  "owner": { "name": "FlowOn" },
-  "metadata": { "description": "FlowOn plugins for Claude Code." },
+  "owner": { "name": "Flowon" },
+  "metadata": { "description": "Flowon plugins for Claude Code: Logic Fabric and its offerings for Dataverse and Dynamics 365." },
   "plugins": [
     {
       "name": "logic-fabric-dataverse",
       "source": "./plugins/logic-fabric-dataverse",
       "description": "Build Logic Fabric for Dataverse solutions like software: request, spec, approved build plan, build with tests, review and acceptance, through your Logic Foundry MCP server. Also documents, governs, analyzes and security-reviews existing projects."
+    },
+    {
+      "name": "flowon-dynamics",
+      "source": "./plugins/flowon-dynamics",
+      "description": "Use the Logic Fabric CLI (flowon-dynamics) and the Flowon PowerShell module from Claude Code: export and import Logic Fabric projects, solutions, security and reference data, data mappings, solution patches, Logic APIs, tests and deployment pipelines, for Logic Fabric for Dataverse and Logic Fabric for Dynamics 365 On-Premises."
     }
   ]
 }
