@@ -1,0 +1,12 @@
+{
+  "name": "flowon",
+  "owner": { "name": "FlowOn" },
+  "metadata": { "description": "FlowOn plugins for Claude Code." },
+  "plugins": [
+    {
+      "name": "logic-fabric-dataverse",
+      "source": "./plugins/logic-fabric-dataverse",
+      "description": "Build Logic Fabric for Dataverse solutions like software: request, spec, approved build plan, build with tests, review and acceptance, through your Logic Foundry MCP server. Also documents, governs, analyzes and security-reviews existing projects."
+    }
+  ]
+}
