@@ -43,6 +43,7 @@ software license in [LICENSE](LICENSE) and requires a Logic Fabric subscription.
 LICENSE
 scripts/sync-cli-skill.mjs      copies the CLI skill from flowon-xrm into plugins/flowon-dynamics
 scripts/sync-expressions.mjs    writes the expression functions table from the grammar Logic Foundry serves
+tests/                          node --test checks of plugin scripts (the dashboard generator)
 plugins/logic-fabric-dataverse/
   .claude-plugin/plugin.json    name, version, repository, license, foundry_url setting, privacy policy, network hosts
   .claude-plugin/icon.png       listing icon (1024 px)
@@ -53,9 +54,10 @@ plugins/logic-fabric-dataverse/
   skills/artifacts/             reference/ per kind, examples/
   skills/grammar/               expressions and context
   skills/testing/               test format, definition of done
-  commands/                     one per stage, status, test, document, govern, insights, secure, agent-tools
+  commands/                     one per stage, status, dashboard, test, document, govern, insights, secure, agent-tools
   agents/                       reviewer, explorer, documenter, process-analyst, security-reviewer
-  hooks/                        hooks.json, gate.mjs, dataverse.mjs, stage.mjs, approval.mjs, context.mjs, export.mjs, workspace.mjs
+  hooks/                        hooks.json, gate.mjs, dataverse.mjs, stage.mjs, approval.mjs, context.mjs, export.mjs, dashboard.mjs, workspace.mjs
+  scripts/                      dashboard.mjs and its page template dashboard.html (the dashboard command)
   evals/                        eval cases (see evals/README.md)
 plugins/flowon-dynamics/
   .claude-plugin/plugin.json    name, version, repository, license, privacy policy, network hosts
@@ -77,7 +79,8 @@ plugins/flowon-dynamics/
   not into the sign-in settings.
 - Keep each plugin's `LICENSE` identical to the root one, and its description the same in its `plugin.json` and
   `.claude-plugin/marketplace.json`.
-- Check changes with `claude plugin validate .` and `claude plugin validate --strict ./plugins/<plugin>`.
+- Check changes with `claude plugin validate .` and `claude plugin validate --strict ./plugins/<plugin>`, and run
+  `node --test` (Node 20 or later).
 - Run the Logic Fabric for Dataverse plugin's offline evals before a release: in `plugins/logic-fabric-dataverse`,
   `claude plugin eval . --tag offline --judge-model sonnet --runs 1 --ablation none` (about $2). Without
   `--runs 1 --ablation none` each case runs three times with and without the plugin, at about six times the cost.
