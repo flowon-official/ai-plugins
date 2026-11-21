@@ -42,6 +42,7 @@ software license in [LICENSE](LICENSE) and requires a Logic Fabric subscription.
 .claude-plugin/marketplace.json
 LICENSE
 scripts/sync-cli-skill.mjs      copies the CLI skill from flowon-xrm into plugins/flowon-dynamics
+scripts/sync-expressions.mjs    writes the expression functions table from the grammar Logic Foundry serves
 plugins/logic-fabric-dataverse/
   .claude-plugin/plugin.json    name, version, repository, license, foundry_url setting, privacy policy, network hosts
   .claude-plugin/icon.png       listing icon (1024 px)
@@ -54,7 +55,7 @@ plugins/logic-fabric-dataverse/
   skills/testing/               test format, definition of done
   commands/                     one per stage, status, test, document, govern, insights, secure, agent-tools
   agents/                       reviewer, explorer, documenter, process-analyst, security-reviewer
-  hooks/                        hooks.json, gate.mjs, stage.mjs, approval.mjs, context.mjs, export.mjs, workspace.mjs
+  hooks/                        hooks.json, gate.mjs, dataverse.mjs, stage.mjs, approval.mjs, context.mjs, export.mjs, workspace.mjs
   evals/                        eval cases (see evals/README.md)
 plugins/flowon-dynamics/
   .claude-plugin/plugin.json    name, version, repository, license, privacy policy, network hosts
@@ -68,6 +69,10 @@ plugins/flowon-dynamics/
 - The CLI skill's source is in the `flowon-xrm` repository, next to the CLI's code
   (`src/server/src/platform/Flowon.Xrm.Tools.CommandLine/skill/`). Change it there, then copy it here with
   `node scripts/sync-cli-skill.mjs <path to flowon-xrm>`.
+- The functions table in `plugins/logic-fabric-dataverse/skills/artifacts/reference/expressions.md` is generated
+  from the grammar Logic Foundry serves. After the grammar changes in `flowon-xrm`, run
+  `node scripts/sync-expressions.mjs <flowon-xrm>/src/server/src/ai/platform/Flowon.Xrm.AI.Agents.Assist/Assets/grammar/fol-grammar.json`;
+  `--check` fails when the table is out of date.
 - The client ID must be written into `.mcp.json`: Claude Code fills plugin settings into the server address but
   not into the sign-in settings.
 - Keep each plugin's `LICENSE` identical to the root one, and its description the same in its `plugin.json` and
