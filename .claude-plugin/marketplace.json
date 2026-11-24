@@ -1,16 +1,30 @@
 {
   "name": "flowon",
-  "owner": { "name": "Flowon" },
-  "metadata": { "description": "Flowon plugins for Claude Code, Codex and GitHub Copilot: Logic Fabric and its offerings for Dataverse and Dynamics 365." },
+  "owner": {
+    "name": "Flowon"
+  },
+  "metadata": {
+    "description": "Flowon plugins for Claude Code, Codex and GitHub Copilot: Logic Fabric and its offerings for Dataverse and Dynamics 365."
+  },
   "plugins": [
     {
       "name": "logic-fabric-dataverse",
-      "source": "./plugins/logic-fabric-dataverse",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/flowon-official/logic-fabric-dataverse-plugin.git",
+        "ref": "v0.10.0",
+        "sha": "69e42104612d15cefac6612f0344b463a7e21878"
+      },
       "description": "Build Logic Fabric for Dataverse solutions like software: request, spec, approved build plan, build with tests, review and acceptance, through your Logic Foundry MCP server. Also documents, governs, analyzes and security-reviews existing projects."
     },
     {
       "name": "flowon-dynamics",
-      "source": "./plugins/flowon-dynamics",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/flowon-official/flowon-dynamics-plugin.git",
+        "ref": "v1.1.0",
+        "sha": "468c9b49df2a26af2bc9048f08aa223fd99a503f"
+      },
       "description": "Use the Logic Fabric CLI (flowon-dynamics) and the Flowon PowerShell module from Claude Code, Codex and GitHub Copilot: export and import Logic Fabric projects, solutions, security and reference data, data mappings, solution patches, Logic APIs, tests and deployment pipelines, for Logic Fabric for Dataverse and Logic Fabric for Dynamics 365 On-Premises."
     }
   ]
