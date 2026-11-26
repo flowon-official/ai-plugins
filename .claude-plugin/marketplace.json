@@ -12,8 +12,8 @@
       "source": {
         "source": "url",
         "url": "https://github.com/flowon-official/logic-fabric-dataverse-plugin.git",
-        "ref": "v0.14.0",
-        "sha": "8f05891fc7cee72b943eb214cce8515ed5509451"
+        "ref": "v0.14.1",
+        "sha": "ea01e12dd1fc9ee8a3d3a23f1e42985a6f0ff03f"
       },
       "description": "Build Logic Fabric for Dataverse solutions like software: request, spec, approved build plan, build with tests, review and acceptance, through your Logic Foundry MCP server. Also documents, governs, analyzes and security-reviews existing projects."
     },
